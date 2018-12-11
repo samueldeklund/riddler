@@ -1,0 +1,99 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows, automata, graphs}
+\usetikzlibrary{arrows,%
+                petri,%
+                topaths}%
+
+\usepackage[latin1]{inputenc}
+
+\title{Riddler Express \\ Precipitation Permutations}
+\author{Samuel Eklund\\linkedin.com/in/sameklund\\ \\Travis Chambers\\linkedin.com/in/travisjchambers}
+\date{2018-12-07}
+
+\begin{document}
+\maketitle
+
+\section{Problem}
+Louie walks to and from work every day. In his city, there is a 50 percent chance of rain each morning and an independent 40 percent chance each evening. His habit is to bring (and use) an umbrella if it?s raining when he leaves the house or office, but to leave them all behind if not. Louie owns three umbrellas.
+
+On Sunday night, two are with him at home and one is at his office. Assuming it never starts raining during his walk to his home or office, what is the probability that he makes it through the work week without getting wet?
+
+\section{Description}
+We start by describing the various states of the system. We  distinguish between Morning $(M)$ and Evening $(E)$. We also count how many umbrellas are at Home $(H_{n})$ and at the Office $(O_{n})$. Using this notation, we describe the starting state as $(M; H_{2}, O_{1})$. We also designate $W_{0}$ and $W_{1}$ as the absorbing states that represent Louie getting wet (as he is traveling with no umbrella while it is raining).
+
+\newpage
+
+\section{Solution}
+We construct a graph of all states, along with their transition probabilities. Blue transitions represent rain and black transitions represent no rain. We also mark the absorbing states $(W_{0}, W_{1})$ in red.
+
+\begin{center}
+\begin{tikzpicture}[
+state/.style={rectangle, draw, node distance = 2cm},
+rain/.style={bend left, auto, ->, color=blue},
+no_rain/.style={bend left, auto, ->}
+]
+% States
+	\node[state] (w0) [color=red] {$W_{0}$};
+	\node[state] (e1) [below left of=w0] {$E; H_{3}, O_{0}$}; 
+	\node[state] (m1) [below left of=e1] {$M; H_{3}, O_{0}$};
+	\node[state] (e2) [below left of=m1] {$E; H_{2}, O_{1}$};
+	\node[initial, state] (m2) [below left of=e2] {$M; H_{2}, O_{1}$};
+	\node[state] (e3) [below right of=m2] {$E; H_{1}, O_{2}$};
+	\node[state] (m3) [below right of=e3] {$M; H_{1}, O_{2}$};
+	\node[state] (e4) [below right of=m3] {$E; H_{0}, O_{3}$};
+	\node[state] (m4) [below right of=e4] {$M; H_{0}, O_{3}$};
+	\node[state] (w1) [below right of=m4, color=red] {$W_{1}$};
+
+%Transitions
+	\path[rain] (e1) edge node [draw=none] {0.4} (w0);
+	\path[no_rain] (e1) edge node [draw=none] {0.6} (m1);
+	\path[rain] (m1) edge node [draw=none] {0.5} (e1);
+	\path[no_rain] (m1) edge node [draw=none] {0.5} (e2);
+	\path[rain] (e2) edge node [draw=none] {0.4} (m1);
+	\path[no_rain] (e2) edge node [draw=none] {0.6} (m2);
+	\path[rain] (m2) edge node [draw=none] {0.5} (e2);
+	\path[rain] (m2) edge node [draw=none] {0.5} (e3);
+	\path[no_rain] (e3) edge node [draw=none] {0.4} (m2);
+	\path[rain] (e3) edge node [draw=none] {0.6} (m3);
+	\path[no_rain] (m3) edge node [draw=none] {0.5} (e3);
+	\path[rain] (m3) edge node [draw=none] {0.5} (e4);
+	\path[no_rain] (e4) edge node [draw=none] {0.4} (m3);
+	\path[rain] (e4) edge node [draw=none] {0.6} (m4);
+	\path[no_rain] (m4) edge node [draw=none] {0.5} (e4);
+	\path[rain] (m4) edge node [draw=none] {0.5} (w1);
+\end{tikzpicture}
+\end{center}
+
+\newpage
+We can create a table of the probabilities of each state based on the previous state, as below. Day 0 represents the initial state, when the probability of moving to $M; H_{2}, O_{1}$ is 1. We omit unnecessary values to reduce calculation, as we only need the values for $W_{0}$ and $W_{1}$.
+
+\begin{center}
+{\footnotesize
+\begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c|} 
+\multicolumn{10}{c}{State} \\ \cline{2-11}
+\multicolumn{1}{l|}{Day} & \rotatebox{90}{$W_{0}$} & \rotatebox{90}{$E; H_{3}, O_{0}$} & \rotatebox{90}{$M; H_{3}, O_{0}$} & \rotatebox{90}{$E; H_{2}, O_{1}$} & \rotatebox{90}{$M; H_{2}, O_{1}$} & \rotatebox{90}{$E; H_{1}, O_{2}$} & \rotatebox{90}{$M; H_{1}, O_{2}$} & \rotatebox{90}{$E; H_{0}, O_{3}$} & \rotatebox{90}{$M; H_{0}, O_{3}$} & \rotatebox{90}{$W_{1}$} \\ \hline
+0.0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+0.5 & 0 & 0 & 0 & 0.5 & 0 & 0.5 & 0 & 0 & 0 & 0 \\
+1.0 & 0 & 0 & 0.2 & 0 & 0.5 & 0 & 0.3 & 0 & 0 & 0 \\
+1.5 & 0 & 0.1 & 0 & 0.35 & 0 & 0.4 & 0 & 0.15 & 0 & 0 \\
+2.0 & 0.04 & 0 & 0.2 & 0 & 0.37 & 0 & 0.3 & 0 & 0.09 & 0 \\
+2.5 & 0.04 & 0.1 & 0 & 0.285 & 0 & 0.335 & 0 & 0.195 & 0 & 0.045 \\
+3.0 & 0.08 & 0 & 0.174 & 0 & 0.305 & 0 & 0.279 & 0 & 0.117 & 0.045 \\
+3.5 & 0.08 & 0.087 & 0 & 0.2395 &  &  & 0 & 0.198 & 0 & 0.1035 \\
+4.0 & 0.1148 & 0 & 0.148 &  &  &  &  & 0 & 0.1188 & 0.1035 \\
+4.5 & 0.1148 & 0.074 &  &  &  &  &  &  & 0 & 0.1629 \\
+5.0 & 0.1444 &  &  &  & &  & &  & & 0.1629 \\ \hline
+\end{tabular}
+}
+\end{center}
+
+The probability that Louie does not get wet during the workweek is:
+\begin{equation*}
+Pr(\text{Dry}) = 1 - Pr(\text{Wet}) = 1 - (W_{0} + W_{1}) = 1 - (0.1444 + 0.1629) = 0.6927 = 69.27\%
+\end{equation*}
+
+\end{document}
