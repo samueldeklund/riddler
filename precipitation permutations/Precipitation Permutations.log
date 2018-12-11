@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/MacPorts 2016_4) (preloaded format=pdflatex 2017.1.11)  11 DEC 2018 14:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/MacPorts 2016_4) (preloaded format=pdflatex 2017.1.11)  11 DEC 2018 15:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -519,7 +519,7 @@ Here is how much of TeX's memory you used:
  430 hyphenation exceptions out of 8191
  55i,9n,66p,543b,803s stack positions out of 5000i,500n,10000p,200000b,80000s
 </opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi8.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on "Precipitation Permutations.pdf" (3 pages, 108108 bytes).
+Output written on "Precipitation Permutations.pdf" (3 pages, 108220 bytes).
 PDF statistics:
  79 PDF objects out of 1000 (max. 8388607)
  63 compressed objects within 1 object stream
