@@ -51,18 +51,18 @@ no_rain/.style={bend left, auto, ->}
 %Transitions
 	\path[rain] (e1) edge node [draw=none] {0.4} (w0);
 	\path[no_rain] (e1) edge node [draw=none] {0.6} (m1);
-	\path[rain] (m1) edge node [draw=none] {0.5} (e1);
-	\path[no_rain] (m1) edge node [draw=none] {0.5} (e2);
+	\path[no_rain] (m1) edge node [draw=none] {0.5} (e1);
+	\path[rain] (m1) edge node [draw=none] {0.5} (e2);
 	\path[rain] (e2) edge node [draw=none] {0.4} (m1);
 	\path[no_rain] (e2) edge node [draw=none] {0.6} (m2);
-	\path[rain] (m2) edge node [draw=none] {0.5} (e2);
+	\path[no_rain] (m2) edge node [draw=none] {0.5} (e2);
 	\path[rain] (m2) edge node [draw=none] {0.5} (e3);
-	\path[no_rain] (e3) edge node [draw=none] {0.4} (m2);
-	\path[rain] (e3) edge node [draw=none] {0.6} (m3);
+	\path[rain] (e3) edge node [draw=none] {0.4} (m2);
+	\path[no_rain] (e3) edge node [draw=none] {0.6} (m3);
 	\path[no_rain] (m3) edge node [draw=none] {0.5} (e3);
 	\path[rain] (m3) edge node [draw=none] {0.5} (e4);
-	\path[no_rain] (e4) edge node [draw=none] {0.4} (m3);
-	\path[rain] (e4) edge node [draw=none] {0.6} (m4);
+	\path[rain] (e4) edge node [draw=none] {0.4} (m3);
+	\path[no_rain] (e4) edge node [draw=none] {0.6} (m4);
 	\path[no_rain] (m4) edge node [draw=none] {0.5} (e4);
 	\path[rain] (m4) edge node [draw=none] {0.5} (w1);
 \end{tikzpicture}
